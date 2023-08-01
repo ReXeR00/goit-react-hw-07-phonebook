@@ -1,7 +1,7 @@
 import { Margin, Label, Input } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter } from '../../redux/selectors';
-import { setFilter } from 'redux/Slices';
+import { setFilter } from 'redux/Slices/filterSlice';
 
 const Filter = () => {
   const dispach = useDispatch();
@@ -13,7 +13,7 @@ const Filter = () => {
         <Input
           type="text"
           value={filter}
-          onChange={event => dispach(setFilter(event.target.value.trim()))}
+          onChange={e => dispach(setFilter(e.target.value.trim()))}
         />
       </Label>
     </Margin>

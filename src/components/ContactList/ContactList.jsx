@@ -1,11 +1,12 @@
 import { List, Item, Button, Text, Spinner } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectError, selectIsLoading,  selectFilteredContacts} from '../../redux/selectors';
-import { useEffect } from 'react';
 import {
-  fetchContacts,
-  deleteContact,
-} from '../../redux/operations';
+  selectError,
+  selectIsLoading,
+  selectFilteredContacts,
+} from '../../redux/selectors';
+import { useEffect } from 'react';
+import { fetchContacts, deleteContact } from '../../redux/operations';
 
 const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
@@ -28,6 +29,7 @@ const ContactList = () => {
       {!filteredContacts?.length && !error && !isLoading && (
         <Text>Your phone book is empty. Add the first contact!</Text>
       )}
+      {error && <Text>{error}</Text>}
       <List>
         {filteredContacts.map(({ id, name, number }) => (
           <Item key={id}>
