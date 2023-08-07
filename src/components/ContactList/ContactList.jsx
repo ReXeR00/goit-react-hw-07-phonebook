@@ -18,10 +18,6 @@ const ContactList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const delContact = id => {
-    dispatch(deleteContact(id));
-  };
-
   return (
     <>
       {isLoading && <Spinner />}
@@ -31,10 +27,14 @@ const ContactList = () => {
       )}
       {error && <Text>{error}</Text>}
       <List>
-        {filteredContacts.map(({ id, name, number }) => (
-          <Item key={id}>
-            {`${name} : ${number}`}
-            <Button type="button" name="delete" onClick={() => delContact(id)}>
+        {filteredContacts.map(contact => (
+          <Item key={contact.id}>
+            {`${contact.name} : ${contact.number}`}
+            <Button
+              type="button"
+              name="delete"
+              onClick={() => dispatch(deleteContact(contact.id))}
+            >
               Delete
             </Button>
           </Item>
